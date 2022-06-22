@@ -1,6 +1,6 @@
-package com.modernmt.profanityfilter;
+package com.modernmt.text.profanity;
 
-import com.modernmt.profanityfilter.dictionary.Dictionary;
+import com.modernmt.text.profanity.dictionary.Dictionary;
 
 import java.io.IOException;
 import java.io.InputStream;

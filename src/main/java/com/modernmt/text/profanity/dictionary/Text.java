@@ -1,4 +1,4 @@
-package com.modernmt.profanityfilter.dictionary;
+package com.modernmt.text.profanity.dictionary;
 
 import java.util.regex.Pattern;
 

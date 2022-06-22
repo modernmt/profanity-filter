@@ -1,8 +1,8 @@
-package com.modernmt.profanityfilter.dictionary;
+package com.modernmt.text.profanity.dictionary;
 
-import com.modernmt.profanityfilter.corpus.Corpus;
-import com.modernmt.profanityfilter.corpus.CorpusReader;
-import com.modernmt.profanityfilter.corpus.TranslationUnit;
+import com.modernmt.text.profanity.corpus.Corpus;
+import com.modernmt.text.profanity.corpus.CorpusReader;
+import com.modernmt.text.profanity.corpus.TranslationUnit;
 
 import java.io.File;
 import java.io.IOException;

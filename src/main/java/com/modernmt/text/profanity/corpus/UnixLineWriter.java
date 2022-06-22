@@ -1,4 +1,4 @@
-package com.modernmt.profanityfilter.corpus;
+package com.modernmt.text.profanity.corpus;
 
 import java.io.*;
 import java.nio.charset.Charset;

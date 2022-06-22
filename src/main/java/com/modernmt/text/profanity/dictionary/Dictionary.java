@@ -1,7 +1,8 @@
-package com.modernmt.profanityfilter.dictionary;
+package com.modernmt.text.profanity.dictionary;
 
-import com.modernmt.profanityfilter.corpus.UnixLineReader;
-import com.modernmt.profanityfilter.corpus.UnixLineWriter;
+
+import com.modernmt.text.profanity.corpus.UnixLineReader;
+import com.modernmt.text.profanity.corpus.UnixLineWriter;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
