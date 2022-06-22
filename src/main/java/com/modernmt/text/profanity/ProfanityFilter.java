@@ -1,6 +1,7 @@
 package com.modernmt.text.profanity;
 
 import com.modernmt.text.profanity.dictionary.Dictionary;
+import com.modernmt.text.profanity.dictionary.Profanity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +46,11 @@ public class ProfanityFilter {
     public boolean test(String language, String text) {
         Dictionary.Matcher matcher = matchers.get(language);
         return matcher != null && matcher.matches(text);
+    }
+
+    public Profanity find(String language, String text) {
+        Dictionary.Matcher matcher = matchers.get(language);
+        return matcher != null ? matcher.find(text) : null;
     }
 
 }
