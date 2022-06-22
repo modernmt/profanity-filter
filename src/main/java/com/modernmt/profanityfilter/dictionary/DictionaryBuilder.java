@@ -74,7 +74,8 @@ public class DictionaryBuilder {
 
         for (Counter counter : table.values()) {
             String text = counter.profanity.text();
-            double score = counter.cooccurrences.get() / ((double) counter.frequency.get());
+            double freq = counter.frequency.get();
+            double score = freq > 0 ? (counter.cooccurrences.get() / freq) : 0.;
 
             profanities.add(new Profanity(text, (float) score));
         }

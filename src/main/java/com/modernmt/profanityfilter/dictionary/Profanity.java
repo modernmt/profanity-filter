@@ -24,6 +24,6 @@ public record Profanity(String text, float score) implements Comparable<Profanit
 
     @Override
     public int compareTo(Profanity o) {
-        return text.compareTo(o.text);
+        return Float.compare(score, o.score);
     }
 }

@@ -72,6 +72,7 @@ public class Dictionary implements Iterable<Profanity> {
 
         List<Profanity> entries = new ArrayList<>(profanities.values());
         Collections.sort(entries);
+        Collections.reverse(entries);
 
         for (Profanity profanity : entries) {
             writer.writeLine(profanity.toString());
