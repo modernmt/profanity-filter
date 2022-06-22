@@ -132,13 +132,23 @@ public class DictionaryBuilder {
         }
     }
 
+    private static String extension(File file) {
+        String name = file.getName();
+        int idx = name.lastIndexOf('.');
+        return idx < 0 ? null : name.substring(idx + 1);
+    }
+
     public static void main(String[] args) throws Throwable {
-        String source = args[0];
-        String target = args[1];
-        File folder = new File(args[2]);
-        File inputDictionaryFile = new File(args[3]);
-        File refDictionaryFile = new File(args[4]);
-        File outputDictionaryFile = new File(args[5]);
+        if (args.length != 4)
+            throw new IllegalArgumentException("Usage: <main> CORPORA_PATH INPUT_DICT REF_DICT OUTPUT_DICT");
+
+        File folder = new File(args[0]);
+        File inputDictionaryFile = new File(args[1]);
+        File refDictionaryFile = new File(args[2]);
+        File outputDictionaryFile = new File(args[3]);
+
+        String source = extension(inputDictionaryFile);
+        String target = extension(refDictionaryFile);
 
         List<Corpus> corpora = Corpus.list(source, target, folder);
         Dictionary input = Dictionary.read(inputDictionaryFile);
