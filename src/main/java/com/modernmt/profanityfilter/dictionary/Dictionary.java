@@ -31,7 +31,7 @@ public class Dictionary implements Iterable<Profanity> {
         private String findString(String input) {
             input = ' ' + Text.normalize(input) + ' ';
             java.util.regex.Matcher matcher = regex.matcher(input);
-            return matcher.find() ? matcher.group() : null;
+            return matcher.find() ? matcher.group(1) : null;
         }
 
     }
@@ -89,15 +89,15 @@ public class Dictionary implements Iterable<Profanity> {
     }
 
     public Matcher matcher(float threshold) {
-        StringBuilder regex = new StringBuilder("\" \"(");
+        StringBuilder regex = new StringBuilder(" (");
 
         for (Profanity profanity : profanities.values()) {
             if (profanity.score() >= threshold)
-                regex.append('"').append(profanity.text()).append("\"|");
+                regex.append(profanity.text()).append('|');
         }
 
         regex.setLength(regex.length() - 1);
-        regex.append(")\" \"");
+        regex.append(") ");
 
         return new Matcher(Pattern.compile(regex.toString()));
     }

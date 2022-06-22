@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Text {
 
-    private static final Pattern BOUNDARIES = Pattern.compile("\\W+");
+    private static final Pattern BOUNDARIES = Pattern.compile("[^\\p{L}]+");
 
     public static String normalize(String text) {
         text = text.toLowerCase();
@@ -13,4 +13,5 @@ public class Text {
 
         return text;
     }
+
 }
