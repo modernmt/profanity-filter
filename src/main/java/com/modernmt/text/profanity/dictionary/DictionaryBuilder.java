@@ -22,7 +22,7 @@ public class DictionaryBuilder {
         this.threads = threads;
     }
 
-    public Dictionary build(List<Corpus> corpora, Dictionary input, Dictionary reference) throws IOException {
+    public Dictionary build(List<Corpus> corpora, Dictionary input, Dictionary reference) throws IOException, InterruptedException {
         FixedThreadsExecutor executor = new FixedThreadsExecutor(threads);
 
         Dictionary.Matcher sentenceMatcher = input.matcher(0.f);
@@ -52,17 +52,14 @@ public class DictionaryBuilder {
                     }
                 }
             }
-        } finally {
+
+            // wait for completion
             executor.shutdown();
-            try {
-                if (!executor.awaitTermination(1L, TimeUnit.DAYS)) {
-                    executor.shutdownNow();
-                    throw new RuntimeException("Timeout");
-                }
-            } catch (InterruptedException e) {
-                executor.shutdownNow();
-                throw new RuntimeException(e);
-            }
+
+            if (!executor.awaitTermination(1L, TimeUnit.DAYS))
+                throw new InterruptedException("Timeout");
+        } finally {
+            executor.shutdownNow();
         }
 
         return createDictionary(table);
