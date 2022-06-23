@@ -48,6 +48,8 @@ public class DictionaryBuilder {
 
                                 if (translationMatcher.matches(tu.translation()))
                                     counter.cooccurrences.incrementAndGet();
+
+				System.out.println(tu.toString());
                             }
                         });
                     }
@@ -74,10 +76,11 @@ public class DictionaryBuilder {
 
         for (Counter counter : table.values()) {
             String text = counter.profanity.text();
-            double freq = counter.frequency.get();
-            double score = freq > 0 ? (counter.cooccurrences.get() / freq) : 0.;
+            int totalFreq = (int) counter.frequency.get();
+            int profanityFreq = (int) counter.cooccurrences.get();
+            double score = totalFreq > 0 ? ( (float) profanityFreq / totalFreq) : 0.;
 
-            profanities.add(new Profanity(text, (float) score));
+            profanities.add(new Profanity(text, (float) score, profanityFreq, totalFreq));
         }
 
         return new Dictionary(profanities);
