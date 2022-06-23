@@ -7,7 +7,6 @@ public record Profanity(String text, float score, int profanity_freq, int total_
     public Profanity(String text, float score) {
         this(text, score, 0, 0);
     }
-}
 
     @Override
     public boolean equals(Object o) {
