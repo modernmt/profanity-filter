@@ -49,7 +49,7 @@ public class DictionaryBuilder {
                                 if (translationMatcher.matches(tu.translation()))
                                     counter.cooccurrences.incrementAndGet();
 
-				System.out.println(tu.toString());
+//				System.out.println(tu.toString());
                             }
                         });
                     }
