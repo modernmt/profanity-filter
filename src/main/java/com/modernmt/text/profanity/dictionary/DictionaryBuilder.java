@@ -6,10 +6,7 @@ import com.modernmt.text.profanity.corpus.TranslationUnit;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -31,7 +28,9 @@ public class DictionaryBuilder {
         Dictionary.Matcher sentenceMatcher = input.matcher(0.f);
         Dictionary.Matcher translationMatcher = reference.matcher(0.f);
 
-        ConcurrentHashMap<Profanity, Counter> table = new ConcurrentHashMap<>();
+        Map<Profanity, Counter> table = new HashMap<>();
+        for (Profanity profanity : input)
+            table.put(profanity, new Counter(profanity));
 
         try {
             for (Corpus corpus : corpora) {
@@ -43,7 +42,7 @@ public class DictionaryBuilder {
                         executor.submit(() -> {
                             Profanity profanity = sentenceMatcher.find(tu.sentence());
                             if (profanity != null) {
-                                Counter counter = table.computeIfAbsent(profanity, Counter::new);
+                                Counter counter = table.get(profanity);
                                 counter.frequency.incrementAndGet();
 
                                 if (translationMatcher.matches(tu.translation()))
