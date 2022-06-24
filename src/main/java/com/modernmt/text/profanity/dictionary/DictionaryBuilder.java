@@ -74,7 +74,7 @@ public class DictionaryBuilder {
             int profanityFreq = (int) counter.cooccurrences.get();
             double score = totalFreq > 0 ? ((float) profanityFreq / totalFreq) : 0.;
 
-            profanities.add(new Profanity(text, (float) score, profanityFreq, totalFreq));
+            profanities.add(new Profanity(text, (float) score));
         }
 
         return new Dictionary(profanities);

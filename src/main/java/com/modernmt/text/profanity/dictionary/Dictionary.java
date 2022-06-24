@@ -55,10 +55,8 @@ public class Dictionary implements Iterable<Profanity> {
             String[] cols = line.split("\t");
             String text = Text.normalize(cols[0]);
             float score = cols.length > 1 ? Float.parseFloat(cols[1]) : 1.f;
-            int profanityFreq = cols.length > 3 ? Integer.parseInt(cols[2]) : 0;
-            int totalFreq = cols.length > 3 ? Integer.parseInt(cols[3]) : 0;
 
-            profanities.add(new Profanity(text, score, profanityFreq, totalFreq));
+            profanities.add(new Profanity(text, score));
         }
 
         return new Dictionary(profanities);
