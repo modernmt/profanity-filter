@@ -44,13 +44,28 @@ public class ProfanityFilter {
     }
 
     public boolean test(String language, String text) {
+        language = languageOf(language);
+
         Dictionary.Matcher matcher = matchers.get(language);
         return matcher != null && matcher.matches(text);
     }
 
     public Profanity find(String language, String text) {
+        language = languageOf(language);
+
         Dictionary.Matcher matcher = matchers.get(language);
         return matcher != null ? matcher.find(text) : null;
+    }
+
+    private static String languageOf(String value) {
+        int idx = value.indexOf('-');
+        if (idx >= 0)
+            value = value.substring(0, idx);
+
+        if ("nn".equals(value) || "nb".equals(value))
+            value = "no";
+
+        return value;
     }
 
 }
