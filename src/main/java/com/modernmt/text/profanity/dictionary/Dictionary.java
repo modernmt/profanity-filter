@@ -49,8 +49,12 @@ public class Dictionary implements Iterable<Profanity> {
         UnixLineReader reader = new UnixLineReader(stream, StandardCharsets.UTF_8);
         String line;
         while ((line = reader.readLine()) != null) {
+            int idx = line.indexOf('#');
+            if (idx >= 0)
+                line = line.substring(0, idx);
             line = line.trim();
-            if (line.isEmpty() || line.startsWith("#")) continue;
+
+            if (line.isEmpty()) continue;
 
             String[] cols = line.split("\t");
             String text = Text.normalize(cols[0]);
