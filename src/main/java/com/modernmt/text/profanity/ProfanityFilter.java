@@ -13,8 +13,9 @@ import java.util.Map;
 public class ProfanityFilter {
 
     private static final List<String> SUPPORTED_LANGUAGES = Arrays.asList(
-            "en", "it"
-    );
+            "ar", "az", "bg", "bs", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "ga", "he", "hi", "hr",
+            "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "lt", "lv", "mk", "ms", "mt", "no", "nl", "pl", "pt", "ro",
+            "ru", "sk", "sl", "sq", "sr", "sv", "sw", "th", "tl", "tr", "uk", "vi", "xh", "zh", "zu");
 
     private static Dictionary loadDictionary(String language) {
         String resource = "dictionary." + language;
