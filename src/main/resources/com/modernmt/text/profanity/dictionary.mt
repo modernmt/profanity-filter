@@ -1,0 +1,51 @@
+kurnut	1.0
+oxx	1.0
+foxx	0.33333334
+żobb	0.25
+ostja	0.2
+iblah	0.06666667
+bela	0.032258064
+falda	0.017094018
+qaddis	0.012269938
+kristu	0.0025510204
+alla	0.0011441647
+bajd	1.6241676E-4
+qaħba	0.0
+spirtu s santu	0.0
+pesisa	0.0
+kretin	0.0
+ħaxxejja	0.0
+kurnuta	0.0
+madonna	0.0
+żbub	0.0
+f għoxx	0.0
+taħxi	0.0
+f oxx	0.0
+pufti	0.0
+idjota	0.0
+pufta	0.0
+ħara	0.0
+kretina	0.0
+liba	0.0
+ħaxxej	0.0
+idjoti	0.0
+kretini	0.0
+boloh	0.0
+moħxi	0.0
+qħab	0.0
+ħaqq	0.0
+sormok	0.0
+għoxx	0.0
+mur ħudu	0.0
+imbeċilli	0.0
+qaddisa	0.0
+qaddisin	0.0
+sorm	0.0
+faldi	0.0
+ostji	0.0
+kurnuti	0.0
+ġarretta	0.0
+muqran	0.0
+poxt	0.0
+ħaxi	0.0
+ċuċ	0.0
