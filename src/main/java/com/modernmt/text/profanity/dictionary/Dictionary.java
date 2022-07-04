@@ -37,13 +37,13 @@ public class Dictionary implements Iterable<Profanity> {
 
     }
 
-    public static Dictionary read(File file) throws IOException {
+    public static Dictionary read(String language, File file) throws IOException {
         try (InputStream stream = new FileInputStream(file)) {
-            return read(stream);
+            return read(language, stream);
         }
     }
 
-    public static Dictionary read(InputStream stream) throws IOException {
+    public static Dictionary read(String language, InputStream stream) throws IOException {
         HashSet<Profanity> profanities = new HashSet<>();
 
         UnixLineReader reader = new UnixLineReader(stream, StandardCharsets.UTF_8);
@@ -63,7 +63,7 @@ public class Dictionary implements Iterable<Profanity> {
             profanities.add(new Profanity(text, score));
         }
 
-        return new Dictionary(profanities);
+        return new Dictionary(language, profanities);
     }
 
     public void write(File file) throws IOException {
@@ -87,15 +87,19 @@ public class Dictionary implements Iterable<Profanity> {
     }
 
     private final Map<String, Profanity> profanities;
+    private final boolean isSpaceSeparated;
 
-    public Dictionary(Set<Profanity> profanities) {
+    public Dictionary(String language, Set<Profanity> profanities) {
         this.profanities = new HashMap<>(profanities.size());
         for (Profanity profanity : profanities)
             this.profanities.put(profanity.text(), profanity);
+        this.isSpaceSeparated = !("zh".equals(language) || "ja".equals(language) || "th".equals(language));
     }
 
     public Matcher matcher(float threshold) {
-        StringBuilder regex = new StringBuilder(" (");
+        StringBuilder regex = new StringBuilder();
+        if (isSpaceSeparated) regex.append(' ');
+        regex.append('(');
 
         for (Profanity profanity : profanities.values()) {
             if (profanity.score() >= threshold)
@@ -103,7 +107,8 @@ public class Dictionary implements Iterable<Profanity> {
         }
 
         regex.setLength(regex.length() - 1);
-        regex.append(") ");
+        regex.append(')');
+        if (isSpaceSeparated) regex.append(' ');
 
         return new Matcher(Pattern.compile(regex.toString()));
     }

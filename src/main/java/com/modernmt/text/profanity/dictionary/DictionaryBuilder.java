@@ -12,13 +12,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class DictionaryBuilder {
 
+    private final String language;
     private final int threads;
 
-    public DictionaryBuilder() {
-        this(Runtime.getRuntime().availableProcessors());
+    public DictionaryBuilder(String language) {
+        this(language, Runtime.getRuntime().availableProcessors());
     }
 
-    public DictionaryBuilder(int threads) {
+    public DictionaryBuilder(String language, int threads) {
+        this.language = language;
         this.threads = threads;
     }
 
@@ -77,7 +79,7 @@ public class DictionaryBuilder {
             profanities.add(new Profanity(text, (float) score));
         }
 
-        return new Dictionary(profanities);
+        return new Dictionary(language, profanities);
     }
 
     private static class Counter {
@@ -149,10 +151,10 @@ public class DictionaryBuilder {
         String target = extension(refDictionaryFile);
 
         List<Corpus> corpora = Corpus.list(source, target, folder);
-        Dictionary input = Dictionary.read(inputDictionaryFile);
-        Dictionary reference = Dictionary.read(refDictionaryFile);
+        Dictionary input = Dictionary.read(source, inputDictionaryFile);
+        Dictionary reference = Dictionary.read(target, refDictionaryFile);
 
-        DictionaryBuilder builder = new DictionaryBuilder();
+        DictionaryBuilder builder = new DictionaryBuilder(source);
         Dictionary output = builder.build(corpora, input, reference);
 
         output.write(outputDictionaryFile);
