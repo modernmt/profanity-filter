@@ -11,20 +11,46 @@ import java.util.regex.Pattern;
 
 public class Dictionary implements Iterable<Profanity> {
 
-    public class Matcher {
+    public interface Matcher {
+
+        Profanity find(String input);
+
+        boolean matches(String input);
+
+    }
+
+    private static class FalseMatcher implements Matcher {
+
+        public static final FalseMatcher INSTANCE = new FalseMatcher();
+
+        @Override
+        public Profanity find(String input) {
+            return null;
+        }
+
+        @Override
+        public boolean matches(String input) {
+            return false;
+        }
+
+    }
+
+    private class RegexMatcher implements Matcher {
 
         private final Pattern regex;
 
-        Matcher(Pattern regex) {
+        RegexMatcher(Pattern regex) {
             this.regex = regex;
         }
 
+        @Override
         public Profanity find(String input) {
             String strProfanity = findString(input);
             return strProfanity == null ? null : Dictionary.this.profanities.get(strProfanity);
 
         }
 
+        @Override
         public boolean matches(String input) {
             return findString(input) != null;
         }
@@ -101,16 +127,21 @@ public class Dictionary implements Iterable<Profanity> {
         if (isSpaceSeparated) regex.append(' ');
         regex.append('(');
 
+        boolean profanityFound = false;
         for (Profanity profanity : profanities.values()) {
-            if (profanity.score() >= threshold)
+            if (profanity.score() >= threshold) {
                 regex.append(profanity.text()).append('|');
+                profanityFound = true;
+            }
         }
+
+        if (!profanityFound) return FalseMatcher.INSTANCE;
 
         regex.setLength(regex.length() - 1);
         regex.append(')');
         if (isSpaceSeparated) regex.append(' ');
 
-        return new Matcher(Pattern.compile(regex.toString()));
+        return new RegexMatcher(Pattern.compile(regex.toString()));
     }
 
     @Override
