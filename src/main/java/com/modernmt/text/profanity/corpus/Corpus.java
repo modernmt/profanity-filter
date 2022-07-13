@@ -6,7 +6,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public record Corpus(File source, File target) {
+public class Corpus {
+
+    private final File source;
+    private final File target;
+
+    public Corpus(File source, File target) {
+        this.source = source;
+        this.target = target;
+    }
+
+    public File source() {
+        return source;
+    }
+
+    public File target() {
+        return target;
+    }
 
     private static File fileWithExtension(File file, String extension) {
         String name = file.getName();

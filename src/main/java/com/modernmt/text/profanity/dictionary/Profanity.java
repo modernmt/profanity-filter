@@ -2,7 +2,23 @@ package com.modernmt.text.profanity.dictionary;
 
 import java.util.Objects;
 
-public record Profanity(String text, float score) implements Comparable<Profanity> {
+public class Profanity implements Comparable<Profanity> {
+
+    private final String text;
+    private final float score;
+
+    public Profanity(String text, float score) {
+        this.text = text;
+        this.score = score;
+    }
+
+    public String text() {
+        return text;
+    }
+
+    public float score() {
+        return score;
+    }
 
     @Override
     public boolean equals(Object o) {

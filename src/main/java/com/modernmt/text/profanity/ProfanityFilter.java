@@ -23,10 +23,16 @@ public class ProfanityFilter {
         InputStream stream = ProfanityFilter.class.getResourceAsStream(resource);
         if (stream == null) throw new RuntimeException("Internal resource not found: " + resource);
 
-        try (stream) {
+        try {
             return Dictionary.read(language, stream);
         } catch (IOException e) {
             throw new RuntimeException("Unable to load internal resource: " + resource);
+        } finally {
+            try {
+                stream.close();
+            } catch (IOException e) {
+                // ignore
+            }
         }
     }
 
