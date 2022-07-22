@@ -19,9 +19,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
-group = 'com.modernmt.text'
-version = '1.0'
-description = 'profanity-filter'
+group = GROUP
+version = VERSION_NAME
+description = POM_ARTIFACT_ID
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 tasks.withType(JavaCompile) {
