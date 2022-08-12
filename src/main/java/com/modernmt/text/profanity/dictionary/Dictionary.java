@@ -84,6 +84,8 @@ public class Dictionary implements Iterable<Profanity> {
 
             String[] cols = line.split("\t");
             String text = Text.normalize(cols[0]);
+            if (text.isEmpty())
+                throw new IOException("Invalid value at line: \"" + line + "\"");
             float score = cols.length > 1 ? Float.parseFloat(cols[1]) : 1.f;
 
             profanities.add(new Profanity(text, score));
