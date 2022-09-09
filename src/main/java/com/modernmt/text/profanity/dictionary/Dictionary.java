@@ -129,15 +129,24 @@ public class Dictionary implements Iterable<Profanity> {
         if (isSpaceSeparated) regex.append(' ');
         regex.append('(');
 
+        List<String> profanitiesList = new ArrayList<>();
+
         boolean profanityFound = false;
         for (Profanity profanity : profanities.values()) {
             if (profanity.score() >= threshold) {
-                regex.append(profanity.text()).append('|');
+                profanitiesList.add(profanity.text());
                 profanityFound = true;
             }
         }
 
         if (!profanityFound) return FalseMatcher.INSTANCE;
+
+        Collections.sort(profanitiesList, Comparator.comparing(String::length));
+        Collections.reverse(profanitiesList);
+
+        for (String profanity : profanitiesList){
+            regex.append(profanity).append('|');
+        }
 
         regex.setLength(regex.length() - 1);
         regex.append(')');
